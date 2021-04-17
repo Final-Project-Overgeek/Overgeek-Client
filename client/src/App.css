@@ -2,13 +2,6 @@
   text-align: center;
 }
 
-/* brilian edit */
-#loading {
-  display: flex;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
