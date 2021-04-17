@@ -6,11 +6,15 @@ import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Provider } from 'react-redux';
 import store from './store/index';
+// import ReactMidtrans from 'react-midtrans'
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+        {/* <ReactMidtrans clienttKey={'SB-Mid-client-2I-9L7MtXwodqM3f'} token={'0a3ad3d6-fcd8-4d3b-836d-fe81e950fd7d'}> */}
+          <App />
+          {/* <button className="btn btn-danger" onClick={(e) => pay(e)}>Pay!</button> */}
+        {/* </ReactMidtrans> */}
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
