@@ -1,8 +1,21 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import { Navbar } from "../components";
+import baseUrl from "../api";
+import { loginAsync } from "../store/actions/userAction";
 
 const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const history = useHistory();
+  const url = baseUrl + '/login';
+  const payload = { email, password };
+
+  function login(event) {
+    event.preventDefault();
+    loginAsync({ url, payload, history });
+  }
+
   return (
     <div
       className="container-fluid"
@@ -21,6 +34,7 @@ const Login = () => {
             placeholder="Username or email"
             required
             autoFocus
+            onChange={(event) => { setEmail(event.target.value) }}
           />
           <label className="sr-only">Password</label>
           <input
@@ -28,9 +42,15 @@ const Login = () => {
             className="form-control mt-3"
             placeholder="Password"
             required
+            onChange={(event) => { setPassword(event.target.value) }}
           />
           <div className="mt-3">
-            <button className="btn btn-lg btn-block">Log in</button>
+            <button
+              className="btn btn-lg btn-block"
+              onClick={(event) => { login(event) }}
+            >
+              Log in
+            </button>
           </div>
         </form>
         <p style={{ color: "#666" }}>
