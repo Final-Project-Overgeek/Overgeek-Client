@@ -3,39 +3,40 @@ import { useHistory } from "react-router-dom";
 
 const LecturerCard = ({ lecturer }) => {
   const history = useHistory();
-  const toLecturerDetail = (event, name) => {
+  const toLecturerDetail = (event, id) => {
     event.preventDefault();
-    history.push(`/lecturer/${name}`);
+    history.push(`/lecturer/${id}`);
   };
 
   return (
-    <div className="col-md-4 col-sm-1 col-lg-3 mt-3 mb-3">
-      <div
-        className="card"
-        style={{ border: "none", background: "transparent" }}
-      >
-        <img
-          src={lecturer.imageUrl}
-          className="card-image"
-          alt={lecturer.name}
-          style={{ objectFit: "contain", height: "150px" }}
-          onClick={(event) => {
-            const name = lecturer.name;
-            toLecturerDetail(event, name);
-          }}
-        />
-        <div className="card-body">
-          <span
-            className="movie-title"
+    <div className="container">
+      <div class="col">
+        <div class="card"
+          style={{ border: "none", background: "transparent" }}
+        >
+          <img
+            src={lecturer.image}
+            className="card-image"
+            alt={lecturer.name}
+            style={{ objectFit: "contain", height: "150px" }}
             onClick={(event) => {
-              const name = lecturer.name;
-              toLecturerDetail(event, name);
+              const id = lecturer.id;
+              toLecturerDetail(event, id);
             }}
-          >
-            {lecturer.name}
-          </span>
-          <span>Team : {lecturer.team}</span>
-          <p>Role : {lecturer.role}</p>
+          />
+          <div className="card-body">
+            <span
+              className="movie-title"
+              onClick={(event) => {
+                const name = lecturer.name;
+                toLecturerDetail(event, name);
+              }}
+            >
+              {lecturer.name}
+            </span>
+            <span>Team : {lecturer.team}</span>
+            <p>Role : {lecturer.role}</p>
+          </div>
         </div>
       </div>
     </div>

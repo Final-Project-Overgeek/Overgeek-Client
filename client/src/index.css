@@ -6,6 +6,20 @@
   font-family: "Poppins", sans-serif;
 }
 
+#img-detail {
+  height: auto;
+  width: 18em;
+  width: 100%;
+  height: 100%;
+  display: table;
+  text-align: center;
+}
+
+.loading {
+  display: flex;
+  margin-left: 15.5cm;
+}
+
 .container-fluid {
   background-color: black;
 }
@@ -25,6 +39,7 @@
   border: 0;
   border-radius: 5px;
 }
+
 .box input:focus,
 .box input:active {
   outline: none;
@@ -32,11 +47,13 @@
   color: #fff;
   font-weight: 300;
 }
+
 .box input::-webkit-outer-spin-button,
 .box input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
 .box button {
   background: #f15a24;
   border: 0;
@@ -45,38 +62,46 @@
   margin: 15px 0;
   border-radius: 5px;
 }
+
 .box button:hover,
 .box button:active {
   background: #ca4c1e;
   color: #fff;
 }
+
 .box p {
   font-size: 14px;
   text-align: center;
 }
+
 .button-signup {
   background: #f15a24;
   font-weight: 500;
   border-radius: 5px;
 }
+
 .button-signup:hover {
   background: #ca4c1e;
 }
+
 .card {
   transition: 0.1s;
   -webkit-transition: all 0.5s;
   color: #fff;
   text-align: center;
 }
+
 .card-image {
   transition: 0.35s;
   height: 400px;
   object-fit: contain;
 }
+
 .card-image:hover {
   transition: 0.35s;
   cursor: pointer;
 }
+
 .card:hover {
   z-index: 1;
   box-shadow: 0 12px 20px rgba(243, 84, 26, 0.5);
@@ -84,6 +109,7 @@
   background-color: transparent;
   -webkit-transform: translate(0, -0.5em);
 }
+
 .movie-title {
   font-weight: 500;
   word-wrap: break-word;
@@ -93,10 +119,12 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
 }
+
 .movie-title:hover {
   color: #f15a24;
   cursor: pointer;
 }
+
 .movie-title-detail {
   font-weight: 700;
   word-wrap: break-word;
