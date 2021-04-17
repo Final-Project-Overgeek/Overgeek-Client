@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../logo.svg";
 
+// brilian edits
+import { setLecturersAsync } from '../store/actions/lecturerAction';
+import { useDispatch, useSelector } from 'react-redux';
+import baseUrl from '../api';
+
 const Home = () => {
+  // brilian edits
+  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const lecturers = useSelector((state) => state.lecturerReducer.lecturers);
+  const url = baseUrl + '/lecturers'
+
+  useEffect(() => {
+    dispatch(setLecturersAsync(url));
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">

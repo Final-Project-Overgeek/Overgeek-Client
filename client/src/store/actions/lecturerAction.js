@@ -11,11 +11,32 @@ export function setLecturersAsync(url) {
       method: 'GET',
       headers: { access_token: localStorage.access_token }
     })
+      .then(({ data }) => {
+        dispatch(setLecturers(data));
+      })
+      .catch(err => {
+        console.log(err);
+      })
   })
-    .then(({ data }) => {
-      dispatch(setLecturers(data));
+}
+
+export function setLecturer(payload) {
+  return { type: 'lecturer/setLecturer', payload };
+}
+
+export function setLecturerAsync({ url, setLoading }) {
+  return ((dispatch) => {
+    axios({
+      url: url,
+      method: 'GET',
+      headers: { access_token: localStorage.access_token }
     })
-    .catch(err => {
-      console.log(err);
-    })
+      .then(({ data }) => {
+        dispatch(setLecturer(data));
+        setLoading(false);
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  })
 }

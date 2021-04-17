@@ -3,6 +3,9 @@ import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Home } from "./pages";
 
+// brilian edits
+import 'bootstrap/dist/css/bootstrap.css';
+
 const App = () => {
   return (
     <Router>

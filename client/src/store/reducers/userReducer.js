@@ -5,7 +5,7 @@ const initialState = {
 function userReducer(state = initialState, actions) {
   const { type, payload } = actions;
 
-  if (type == 'user/setUser') {
+  if (type === 'user/setUser') {
     return { ...state, user: payload};
   };
 
