@@ -4,17 +4,28 @@ export function loginAsync({ url, payload, history }) {
   axios({
     url: url,
     method: 'POST',
-    data: {
-      email: payload.email,
-      password: payload.password
-    }
+    data: payload
   })
     .then(({ data }) => {
       localStorage.setItem('access_token', data.access_token);
       history.push('/');
     })
     .catch(err => {
-      alert('fail')
+      console.log(err);
+    })
+}
+
+export function registerAsync({ url, payload, history }) {
+  axios({
+    url: url,
+    method: 'POST',
+    data: payload
+  })
+    .then(({ data }) => {
+      console.log(data)
+      history.push('/login');
+    })
+    .catch(err => {
       console.log(err);
     })
 }

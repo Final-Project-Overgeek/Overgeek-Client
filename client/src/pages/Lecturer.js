@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Navbar } from "../components";
 import { useParams } from "react-router-dom";
+import baseUrl from "../api";
+import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { setLecturersAsync } from "../store/actions/lecturerAction";
 
 const Lecturer = () => {
   const { name } = useParams();
-  // Fetch get one lecturer dari API utk detail per-lecturer
-  // tampilin semua data lecturer disini
+  const [loading, setLoading] = useState(true);
+  const url = baseUrl + '/lecturers';
+  const dispatch = useDispatch();
+  const lecturers = useSelector((state) => state.lecturerReducer.lecturers);
+
+  useEffect(() => {
+    dispatch(setLecturersAsync({ url, setLoading }))
+  }, []);
 
   return (
     <div className="container-fluid">
