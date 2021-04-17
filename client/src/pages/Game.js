@@ -1,17 +1,21 @@
-import React, { useState } from "react";
-import { Navbar, LecturerCard } from "../components";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import baseUrl from "../api";
+import { useDispatch, useSelector } from "react-redux";
+import { setLecturersAsync } from "../store/actions/lecturerAction";
+import Loading from "../components/Loading";
+import { Navbar, LecturerCard } from "../components";
 
 const Game = () => {
-  // Ini ngehit dari api server, Fetch all lecturer
-  const [lecturers, setlecturers] = useState({
-    name: "TenZ",
-    role: "Duelist",
-    team: "Sentinels",
-    imageUrl:
-      "https://oneesports.blob.core.windows.net/cdn-data/wp-content/uploads/2020/05/Valorant_TenZBeginnersGuide-450x253.jpg",
-  });
+  const lecturers = useSelector((state) => state.lecturerReducer.lecturers);
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
   const { game } = useParams();
+  const url = baseUrl + '/lecturers?game=' + game;
+
+  useEffect(() => {
+    dispatch(setLecturersAsync({ url, setLoading }))
+  }, []);
 
   return (
     <div className="container-fluid">
@@ -19,11 +23,13 @@ const Game = () => {
       <div className="content">
         <h1 className="fw-bold">{game}</h1>
         <h1 className="fw-bold">Lecturer List</h1>
-        <div className="row">
-          {/* {lecturers.map((lecturer) => ( */}
-          <LecturerCard lecturer={lecturers} />
-          {/* // ))} */}
-        </div>
+        {loading ? <Loading /> :
+          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-3">
+            {lecturers.map((lecturer) => (
+              <LecturerCard lecturer={lecturer} key={lecturer.id} />
+            ))}
+          </div>
+        }
       </div>
     </div>
   );

@@ -9,7 +9,7 @@ const App = () => {
         <Route path="/game/:game">
           <Game />
         </Route>
-        <Route path="/lecturer/:name">
+        <Route path="/lecturer/:id">
           <Lecturer />
         </Route>
         <Route path="/payments">
