@@ -1,31 +1,30 @@
-import axios from 'axios';
+import axios from "axios";
 
 export function loginAsync({ url, payload, history }) {
   axios({
     url: url,
-    method: 'POST',
-    data: payload
+    method: "POST",
+    data: payload,
   })
     .then(({ data }) => {
-      localStorage.setItem('access_token', data.access_token);
-      history.push('/');
+      localStorage.setItem("access_token", data.access_token);
+      history.push("/");
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
-    })
+    });
 }
 
 export function registerAsync({ url, payload, history }) {
   axios({
     url: url,
-    method: 'POST',
-    data: payload
+    method: "POST",
+    data: payload,
   })
     .then(({ data }) => {
-      console.log(data)
-      history.push('/login');
+      history.push("/login");
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
-    })
+    });
 }

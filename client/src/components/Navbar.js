@@ -1,8 +1,15 @@
 import React from "react";
 import LogoOverGeek from "../assets/images/OVERGEEK_LOGO_WHITE.svg";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const Navbar = ({ page }) => {
+  const history = useHistory();
+  const logout = (event) => {
+    event.preventDefault();
+    localStorage.removeItem("access_token");
+    history.push("/login");
+  };
+
   return (
     <nav
       className="navbar navbar-expand-md navbar-dark"
@@ -34,7 +41,20 @@ const Navbar = ({ page }) => {
         </button>
         <div className="collapse navbar-collapse" id="toggleMobileMenu">
           <ul className="navbar-nav ms-auto text-center">
-            {page === "login" ? (
+            {localStorage.access_token ? (
+              <>
+                <li>
+                  <a
+                    className="nav-link button-signup"
+                    href="/logout"
+                    style={{ color: "#fff", padding: "10px 20px" }}
+                    onClick={(e) => logout(e)}
+                  >
+                    Log out
+                  </a>
+                </li>
+              </>
+            ) : page === "login" ? (
               <li>
                 <Link to="/signup" style={{ textDecoration: "none" }}>
                   <a

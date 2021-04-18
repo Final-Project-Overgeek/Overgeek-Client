@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Navbar, GameCard } from "../components";
 
 const Home = () => {
-  const [games, setGames] = useState([
+  const [games] = useState([
     {
       title: "League of Legends: Wild Rift",
       imageUrl:
@@ -46,8 +46,6 @@ const Home = () => {
 };
 
 export default Home;
-
-
 
 /*
 const [games, setGames] = useState([

@@ -11,14 +11,12 @@ const LecturerCard = ({ lecturer }) => {
   return (
     <div className="container">
       <div class="col">
-        <div class="card"
-          style={{ border: "none", background: "transparent" }}
-        >
+        <div class="card" style={{ border: "none", background: "transparent" }}>
           <img
             src={lecturer.image}
             className="card-image"
             alt={lecturer.name}
-            style={{ objectFit: "contain", height: "150px" }}
+            style={{ objectFit: "contain", height: "300px" }}
             onClick={(event) => {
               const id = lecturer.id;
               toLecturerDetail(event, id);

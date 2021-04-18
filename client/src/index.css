@@ -84,6 +84,16 @@
   background: #ca4c1e;
 }
 
+.button-courses {
+  background: #f15a24;
+  font-weight: 500;
+  border-radius: 5px;
+}
+
+.button-courses:hover {
+  background: #ca4c1e;
+}
+
 .card {
   transition: 0.1s;
   -webkit-transition: all 0.5s;
@@ -133,4 +143,8 @@
   text-overflow: ellipsis;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
+}
+
+.card-img-top {
+  object-fit: contain;
 }
