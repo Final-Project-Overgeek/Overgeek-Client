@@ -8,6 +8,7 @@ export function setTokenLoading(payload) {
   return { type: 'IsTokenLoading/setTrueFalse', payload };
 }
 
+
 export function createToken({ url, payload }) {
   return dispatch => {
     dispatch(setTokenLoading(true))
@@ -30,5 +31,5 @@ export function createToken({ url, payload }) {
         console.log(err);
       })
   }
-  
 }
+
