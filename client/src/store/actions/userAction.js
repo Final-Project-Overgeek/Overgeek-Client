@@ -1,4 +1,7 @@
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+toast.configure();
 
 export function loginAsync({ url, payload, history }) {
   axios({
@@ -9,9 +12,17 @@ export function loginAsync({ url, payload, history }) {
     .then(({ data }) => {
       localStorage.setItem("access_token", data.access_token);
       history.push("/");
+      toast.success(`Success to log in to OverGeek!`, {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER,
+      });
     })
     .catch((err) => {
       console.log(err);
+      toast.error(`Failed to log in to OverGeek!`, {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER,
+      });
     });
 }
 
