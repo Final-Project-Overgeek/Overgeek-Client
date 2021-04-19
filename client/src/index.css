@@ -7,17 +7,13 @@
 }
 
 #img-detail {
-  height: auto;
-  width: 18em;
-  width: 100%;
-  height: 100%;
-  display: table;
-  text-align: center;
+  width: 280px;
+  height: 300px;
 }
 
 .loading {
   display: flex;
-  margin-left: 15.5cm;
+  margin-top: 10rem;
 }
 
 .container-fluid {

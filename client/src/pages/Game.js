@@ -3,8 +3,7 @@ import { useParams } from "react-router-dom";
 import baseUrl from "../api";
 import { useDispatch, useSelector } from "react-redux";
 import { setLecturersAsync } from "../store/actions/lecturerAction";
-import Loading from "../components/Loading";
-import { Navbar, LecturerCard } from "../components";
+import { Navbar, LecturerCard, Loading } from "../components";
 
 const Game = () => {
   const lecturers = useSelector((state) => state.lecturerReducer.lecturers);

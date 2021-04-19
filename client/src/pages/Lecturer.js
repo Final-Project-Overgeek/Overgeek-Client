@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Navbar, Loading } from "../components";
+import { Navbar, Loading, VideoCard } from "../components";
 import baseUrl from "../api";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -23,66 +23,114 @@ const Lecturer = () => {
         {loading ? (
           <Loading />
         ) : (
-          <div
-            class="mb-3 p-2"
-            style={{
-              textAlign: "left",
-              width: "25cm",
-              display: "flex",
-              marginLeft: "auto",
-              marginRight: "auto",
-              backgroundColor: "black",
-            }}
-          >
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img
-                  className="card-img-top"
-                  src={lecturer[0].image}
-                  alt={lecturer[0].name}
-                  id="img-detail"
-                />
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h2 class="card-title" style={{ color: "#fff" }}>
-                    <i class="text-muted h5">Name: </i>
-                    {lecturer[0].name}
-                  </h2>
-                  <p class="card-text h4" style={{ color: "#fff" }}>
-                    <i class="text-muted h5">Profile: </i>
-                    {lecturer[0].profile}
-                  </p>
-                  <p class="card-text h4" style={{ color: "#fff" }}>
-                    <i class="text-muted h5">Game: </i>
-                    {lecturer[0].game}
-                  </p>
-                  <p class="card-text h4" style={{ color: "#fff" }}>
-                    <i class="text-muted h5">Role: </i>
-                    {lecturer[0].role}
-                  </p>
-                  <p class="card-text h4" style={{ color: "#fff" }}>
-                    <i class="text-muted h5">Team: </i>
-                    {lecturer[0].team}
-                  </p>
-                  <p class="card-text h4" style={{ color: "#fff" }}>
-                    <i class="text-muted h5">Language: </i>
-                    {lecturer[0].language}
-                  </p>
-                  <p
-                    className="button-signup"
-                    style={{
-                      color: "#fff",
-                      padding: "10px 20px",
-                      textDecoration: "none",
-                      textAlign: "center",
-                      cursor: "pointer",
-                    }}
-                  >
-                    See Courses
-                  </p>
+          <div className="row">
+            <div
+              className="mb-3 p-2"
+              style={{
+                textAlign: "left",
+                width: "25cm",
+                display: "flex",
+                marginLeft: "auto",
+                marginRight: "auto",
+                backgroundColor: "black",
+              }}
+            >
+              <div className="row">
+                <h1
+                  className="card-title text-center mb-5"
+                  style={{ color: "#fff", fontWeight: "bold" }}
+                >
+                  {lecturer[0].name}
+                </h1>
+                <div className="col-md-4 text-center">
+                  <img
+                    className="card-img-top"
+                    src={lecturer[0].image}
+                    alt={lecturer[0].name}
+                    id="img-detail"
+                  />
+                </div>
+                <div className="col-md-5">
+                  <div className="card-body" style={{ fontSize: "18px" }}>
+                    <p
+                      className="detail-info fw-bold"
+                      style={{ color: "#f15a24" }}
+                    >
+                      Profile:
+                    </p>
+                    <p
+                      className="movie-desc detail"
+                      style={{ textAlign: "justify" }}
+                    >
+                      {lecturer[0].profile}
+                    </p>
+                    <p
+                      className="detail-info fw-bold"
+                      style={{ color: "#f15a24" }}
+                    >
+                      Game:
+                    </p>
+                    <p
+                      className="movie-desc detail"
+                      style={{ textAlign: "justify" }}
+                    >
+                      {lecturer[0].game}
+                    </p>
+                    <p
+                      className="detail-info fw-bold"
+                      style={{ color: "#f15a24" }}
+                    >
+                      Language:
+                    </p>
+                    <p
+                      className="movie-desc detail"
+                      style={{ textAlign: "justify" }}
+                    >
+                      {lecturer[0].language}
+                    </p>
+                  </div>
+                </div>
+                <div className="col-md-3">
+                  <div className="card-body" style={{ fontSize: "18px" }}>
+                    <p
+                      className="detail-info fw-bold"
+                      style={{ color: "#f15a24" }}
+                    >
+                      Team:
+                    </p>
+                    <p
+                      className="movie-desc detail"
+                      style={{ textAlign: "justify" }}
+                    >
+                      {lecturer[0].team}
+                    </p>
+                    <p
+                      className="detail-info fw-bold"
+                      style={{ color: "#f15a24" }}
+                    >
+                      Role:
+                    </p>
+                    <p
+                      className="movie-desc detail"
+                      style={{ textAlign: "justify" }}
+                    >
+                      {lecturer[0].role}
+                    </p>
+                  </div>
                 </div>
               </div>
+            </div>
+            <div className="row">
+              <h1
+                className="card-title text-center mb-5"
+                style={{ color: "#fff", fontWeight: "bold" }}
+              >
+                All Courses
+              </h1>
+              <VideoCard />
+              <VideoCard />
+              <VideoCard />
+              <VideoCard />
             </div>
           </div>
         )}
