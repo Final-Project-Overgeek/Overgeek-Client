@@ -1,6 +1,9 @@
 import React from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import LogoOverGeek from "../assets/images/OVERGEEK_LOGO_WHITE.svg";
 import { Link, useHistory } from "react-router-dom";
+toast.configure();
 
 const Navbar = ({ page }) => {
   const history = useHistory();
@@ -8,6 +11,10 @@ const Navbar = ({ page }) => {
     event.preventDefault();
     localStorage.removeItem("access_token");
     history.push("/login");
+    toast.success(`Success to log out!`, {
+      autoClose: 3000,
+      position: toast.POSITION.TOP_CENTER,
+    });
   };
 
   return (

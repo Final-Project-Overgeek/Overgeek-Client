@@ -5,10 +5,10 @@ import baseUrl from "../api";
 import { loginAsync } from "../store/actions/userAction";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const history = useHistory();
-  const url = baseUrl + '/login';
+  const url = baseUrl + "/login";
   const payload = { email, password };
 
   function login(event) {
@@ -34,7 +34,9 @@ const Login = () => {
             placeholder="Username or email"
             required
             autoFocus
-            onChange={(event) => { setEmail(event.target.value) }}
+            onChange={(event) => {
+              setEmail(event.target.value);
+            }}
           />
           <label className="sr-only">Password</label>
           <input
@@ -42,12 +44,16 @@ const Login = () => {
             className="form-control mt-3"
             placeholder="Password"
             required
-            onChange={(event) => { setPassword(event.target.value) }}
+            onChange={(event) => {
+              setPassword(event.target.value);
+            }}
           />
           <div className="mt-3">
             <button
               className="btn btn-lg btn-block"
-              onClick={(event) => { login(event) }}
+              onClick={(event) => {
+                login(event);
+              }}
             >
               Log in
             </button>
