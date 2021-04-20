@@ -12,6 +12,7 @@ const VideoCard = () => {
           allowfullscreen
         ></iframe>
       </div>
+      <h4 className="mt-3">Title</h4>
     </div>
   );
 };

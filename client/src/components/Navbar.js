@@ -7,6 +7,7 @@ toast.configure();
 
 const Navbar = ({ page }) => {
   const history = useHistory();
+
   const logout = (event) => {
     event.preventDefault();
     localStorage.removeItem("access_token");
