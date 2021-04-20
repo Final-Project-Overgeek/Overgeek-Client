@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Navbar, GameCard } from "../components";
+import { Navbar, GameCard, CommunityCarousel } from "../components";
 
 const Home = () => {
+
   const [games] = useState([
     {
       title: "League of Legends: Wild Rift",
@@ -32,9 +33,14 @@ const Home = () => {
           Welcome To OverG<span style={{ color: "#f15a24" }}>ee</span>k
         </h1>
         <h4 className="mt-3 mb-5">Best Way To Improve Your Skill</h4>
+        <div className="community">
+          <h5 className="my-3">Join Our Community</h5>
+          <CommunityCarousel />
+        </div>
         <h5 style={{ fontWeight: "600", margin: "30px 0" }}>
           CHOOSE YOUR GAME
         </h5>
+        
         <div className="row">
           {games.map((game) => (
             <GameCard game={game} key={game.title} />
