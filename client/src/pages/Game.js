@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import baseUrl from "../api";
 import { useDispatch, useSelector } from "react-redux";
 import { setLecturersAsync } from "../store/actions/lecturerAction";
-import { Navbar, LecturerCard, Loading } from "../components";
+import { Navbar, LecturerCard, Loading, Footer } from "../components";
 
 const Game = () => {
   const lecturers = useSelector((state) => state.lecturerReducer.lecturers);
@@ -20,8 +20,8 @@ const Game = () => {
     <div className="container-fluid">
       <Navbar game={game} />
       <div className="content">
-        <h1 className="fw-bold">{game}</h1>
-        <h1 className="fw-bold">Lecturer List</h1>
+        <h2 className="fw-bold">{game}</h2>
+        <h3>Meet our guide creators</h3>
         {loading ? (
           <Loading />
         ) : (
@@ -32,6 +32,7 @@ const Game = () => {
           </div>
         )}
       </div>
+      <Footer />
     </div>
   );
 };

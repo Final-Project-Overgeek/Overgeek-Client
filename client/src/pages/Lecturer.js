@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Navbar, Loading, VideoCard } from "../components";
+import { Navbar, Loading, VideoCard, Footer } from "../components";
 import baseUrl from "../api";
 import { useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -176,6 +176,20 @@ const Lecturer = () => {
                   ></iframe>
                 </div>
                 <h4>Title</h4>
+                <video width="320" height="240" controls>
+                  <source src="movie.mp4" type="video/mp4" />
+                  <source
+                    src="/upload/data/e3355f2b46ba90f13779db58fa8d5120"
+                    type="video/ogg"
+                  />
+                  Your browser does not support the video tag.
+                </video>
+                <img
+                  src="/upload/data/7e346a77c6945bf29c28073b8fe312c7"
+                  alt="Logo OverGeek"
+                  height="125"
+                  className="mt-5"
+                />
               </div>
               <VideoCard />
               <VideoCard />
@@ -183,6 +197,7 @@ const Lecturer = () => {
           </div>
         )}
       </div>
+      <Footer />
     </div>
   );
 };

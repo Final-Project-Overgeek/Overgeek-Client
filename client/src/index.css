@@ -145,13 +145,6 @@
   object-fit: contain;
 }
 
-/* .wrapper {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-} */
-
 .wrapper h4 {
   perspective: 0;
   margin: 0;
@@ -160,34 +153,33 @@
   font-size: 6px;
 }
 
-.wrapper span{
+.wrapper span {
   font-size: 20px;
 }
 
 .wrapper span:before {
-  content: '';
+  content: "";
   animation: animate infinite 20s;
-
 }
 
-@keyframes animate{
-  0%{
-    content: 'We will teach you how to win atleast 1 in 10 matches'
+@keyframes animate {
+  0% {
+    content: "We will teach you how to win atleast 1 in 10 matches";
   }
-  20%{
-    content: 'We will teach you how to spam "?"'
+  20% {
+    content: 'We will teach you how to spam "?"';
   }
-  40%{
-    content: 'We will teach you how to be a million $ freelancer'
+  40% {
+    content: "We will teach you how to be a million $ freelancer";
   }
-  60%{
-    content: 'We will teach you how to bully the weak'
+  60% {
+    content: "We will teach you how to bully the weak";
   }
-  80%{
-    content: 'We will and always will'
+  80% {
+    content: "We will and always will";
   }
-  100%{
-    content: 'Subscribe! and reach the very peak of the peak!'
+  100% {
+    content: "Subscribe! and reach the very peak of the peak!";
   }
 }
 
@@ -207,13 +199,12 @@
 }
 
 .community a span {
-  /* display: block; */
   position: absolute;
   background-color: #f15a24;
   text-decoration: none;
 }
 
-.community a span:nth-child(1){
+.community a span:nth-child(1) {
   left: 0;
   bottom: 0;
   width: 1px;
@@ -223,13 +214,13 @@
   height: 100%;
 }
 
-.community a:hover span:nth-child(1){
+.community a:hover span:nth-child(1) {
   transform: scaleY(1);
   transform-origin: bottom;
   transition: transform 0.5s;
 }
 
-.community a span:nth-child(2){
+.community a span:nth-child(2) {
   left: 0;
   bottom: 0;
   width: 100%;
@@ -239,13 +230,13 @@
   height: 1px;
 }
 
-.community a:hover span:nth-child(2){
+.community a:hover span:nth-child(2) {
   transform: scaleX(1);
   transform-origin: left;
   transition: transform 0.5s;
 }
 
-.community a span:nth-child(3){
+.community a span:nth-child(3) {
   right: 0;
   bottom: 0;
   width: 1px;
@@ -255,13 +246,13 @@
   height: 100%;
 }
 
-.community a:hover span:nth-child(3){
+.community a:hover span:nth-child(3) {
   transform: scaleY(1);
   transform-origin: top;
   transition: transform 0.5s;
 }
 
-.community a span:nth-child(4){
+.community a span:nth-child(4) {
   left: 0;
   top: 0;
   width: 100%;
@@ -271,7 +262,7 @@
   height: 1px;
 }
 
-.community a:hover span:nth-child(4){
+.community a:hover span:nth-child(4) {
   transform: scaleX(1);
   transform-origin: right;
   transition: transform 0.5s;
@@ -281,9 +272,7 @@
   justify-content: space-between;
 }
 
-
 .rate-icon:hover,
 .bi:hover {
   color: #f15a24;
 }
-
