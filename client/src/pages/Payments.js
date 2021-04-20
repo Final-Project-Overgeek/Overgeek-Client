@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Navbar, Loading } from "../components";
+import { Navbar, Loading, Footer } from "../components";
 import axios from "axios";
 import baseUrl from "../api";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { createToken } from "../store/actions/paymentsAction";
 import { useDispatch, useSelector } from "react-redux";
 import { setSubscriptionAsync } from "../store/actions/subscriptionsAction";
@@ -17,7 +17,7 @@ function Payments() {
   //--------------------------------------------------------//
   const [loading, setLoading] = useState(true);
   const url = baseUrl + "/subscriptions";
-  const history = useHistory()
+  const history = useHistory();
   const subscriptions = useSelector(
     (state) => state.subscriptionsReducer.subscriptions
   );
@@ -26,27 +26,19 @@ function Payments() {
     dispatch(setSubscriptionAsync({ url, setLoading }));
   }, []);
 
-  console.log(subscriptions);
-
   function pay(e, payload) {
     e.preventDefault();
-    // dispatch(createToken({url: 'http://localhost:3001/payments/token', payload: amount}))
-
-    // console.log(token)
-    // loading || !token.token ? console.log('loading....') :
     axios({
       url: "http://localhost:3001/payments/token",
       method: "POST",
       data: {
-        // amount: amount
         payload,
       },
       headers: {
-        access_token: localStorage.access_token
+        access_token: localStorage.access_token,
       },
     })
       .then((data) => {
-        console.log(data.data);
         window.snap.pay(data.data.token, {
           onSuccess: function (result) {
             console.log(result, "asdasdsad");
@@ -60,17 +52,16 @@ function Payments() {
                 result,
               },
               headers: {
-                access_token: localStorage.access_token
+                access_token: localStorage.access_token,
               },
             })
               .then((data) => {
                 console.log(data);
-                history.push('/')
+                history.push("/");
               })
               .catch((err) => {
                 console.log(err);
               });
-
           },
           onError: function (result) {
             console.log(result, "");
@@ -84,24 +75,48 @@ function Payments() {
   return (
     <div className="container-fluid">
       <Navbar />
-      <div className="container flex" style={{height: "100vh"}}>
+      <div className="container flex" style={{ height: "100vh" }}>
         <div className="row subscard">
+          <h1
+            style={{
+              color: "white",
+              fontWeight: "bold",
+              textAlign: "center",
+              marginBottom: "50px",
+            }}
+          >
+            Subscribe and join with us!
+          </h1>
           {loading ? (
             <Loading />
           ) : (
             subscriptions.map((data) => {
               return (
-                <div className="card col-3 mx-3" style={{ width: "18rem" }}>
+                <div
+                  className="card col-3"
+                  style={{ width: "18rem", background: "transparent" }}
+                >
                   <img
                     className="card-img-top"
                     src={data.image}
                     style={{ height: "25rem" }}
                   />
                   <div className="card-body">
-                    <p className="card-text text-warning">{data.name}</p>
-                    <p className="card-text text-primary">{data.price}</p>
+                    <p className="card-text">
+                      {data.name === "monthly"
+                        ? "1 month"
+                        : data.name === "season"
+                        ? "6 months"
+                        : "12 months"}
+                    </p>
+                    <p className="card-text">IDR {data.price}</p>
                     <button
-                      className="btn btn-warning"
+                      className="btn button-courses"
+                      style={{
+                        background: "#f15a24",
+                        bordeRadius: "5px",
+                        color: "white",
+                      }}
                       onClick={(e) => pay(e, data)}
                     >
                       Subscribe!
@@ -113,11 +128,7 @@ function Payments() {
           )}
         </div>
       </div>
-
-      {/* <form>
-        <input type="number" onChange={(e)=> {setAmount(e.target.value)}}/>
-        <button onClick={(e) => pay(e)}>but</button>
-      </form> */}
+      <Footer />
     </div>
   );
 }

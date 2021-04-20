@@ -12,11 +12,8 @@ const Login = () => {
   const dispatch = useDispatch();
   const url = baseUrl + "/login";
   const payload = { email, password };
-  
+
   function login(event) {
-    console.log(history.location.pathname)
-    const from = history.location.state
-    console.log(from,'<><><>')
     event.preventDefault();
     loginAsync({ url, payload, history });
     dispatch(loginAsync({ url, payload, history }));
@@ -24,7 +21,6 @@ const Login = () => {
 
   return (
     <div
-    
       className="container-fluid"
       style={{ minHeight: "100vh", background: "black" }}
     >
