@@ -3,11 +3,13 @@ import { Link, useHistory } from "react-router-dom";
 import { Navbar } from "../components";
 import baseUrl from "../api";
 import { loginAsync } from "../store/actions/userAction";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
+  const dispatch = useDispatch();
   const url = baseUrl + "/login";
   const payload = { email, password };
   
@@ -16,7 +18,8 @@ const Login = () => {
     const from = history.location.state
     console.log(from,'<><><>')
     event.preventDefault();
-    loginAsync({ url, payload, history, from });
+    loginAsync({ url, payload, history });
+    dispatch(loginAsync({ url, payload, history }));
   }
 
   return (
@@ -28,7 +31,12 @@ const Login = () => {
       <Navbar page={"login"} />
       {console.log(history.location.state)}
       <div className="text-center box">
-        <form style={{ maxWidth: "400px", margin: "auto" }}>
+        <form
+          style={{
+            maxWidth: "400px",
+            margin: "4rem auto 0",
+          }}
+        >
           <h1 className="h3 mb-4 font-weight-bold" style={{ color: "#fff" }}>
             Member Login
           </h1>

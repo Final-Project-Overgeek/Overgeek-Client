@@ -10,7 +10,7 @@ const Game = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const { game } = useParams();
-  const url = baseUrl + "/lecturers?game=" + game;
+  const url = baseUrl + "/lecturers/game?game=" + game;
 
   useEffect(() => {
     dispatch(setLecturersAsync({ url, setLoading }));
