@@ -17,6 +17,7 @@ function Payments() {
   //--------------------------------------------------------//
   const [loading, setLoading] = useState(true);
   const url = baseUrl + "/subscriptions";
+  const history = useHistory()
   const subscriptions = useSelector(
     (state) => state.subscriptionsReducer.subscriptions
   );
@@ -41,22 +42,16 @@ function Payments() {
         payload,
       },
       headers: {
-        access_token:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJrZW4xQG1haWwuY29tIiwidXNlcm5hbWUiOiJrZW4xIiwicGhvbmVfbnVtYmVyIjoiODg4OTU1MzIyNDQiLCJzdWJzY3JpcHRpb25fZGF0ZSI6bnVsbCwicm9sZSI6InVzZXIiLCJpYXQiOjE2MTg2MjQ5NzV9.Tr_K4qCLezik71o32lIlOBbrF2SrRrE9CBTCzbm3qD0",
+        access_token: localStorage.access_token
       },
     })
       .then((data) => {
         console.log(data.data);
         window.snap.pay(data.data.token, {
           onSuccess: function (result) {
-            // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-            // return <h1> {(result)} </h1>
             console.log(result, "asdasdsad");
           },
-          // Optional
           onPending: (result) => {
-            // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-            // return <h1>{JSON.stringify(result, null, 2)}</h1>
             console.log(result, "pasti masuk sini!");
             axios({
               url: "http://localhost:3001/payments",
@@ -65,22 +60,20 @@ function Payments() {
                 result,
               },
               headers: {
-                access_token:
-                  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJrZW4xQG1haWwuY29tIiwidXNlcm5hbWUiOiJrZW4xIiwicGhvbmVfbnVtYmVyIjoiODg4OTU1MzIyNDQiLCJzdWJzY3JpcHRpb25fZGF0ZSI6bnVsbCwicm9sZSI6InVzZXIiLCJpYXQiOjE2MTg2MjQ5NzV9.Tr_K4qCLezik71o32lIlOBbrF2SrRrE9CBTCzbm3qD0",
+                access_token: localStorage.access_token
               },
             })
               .then((data) => {
                 console.log(data);
+                history.push('/')
               })
               .catch((err) => {
                 console.log(err);
               });
 
-            // return <h1> {JSON.stringify(result, null, 2)} </h1>
           },
-          // Optional
           onError: function (result) {
-            console.log(result, "<><><><><<<");
+            console.log(result, "");
           },
         });
       })
@@ -91,8 +84,8 @@ function Payments() {
   return (
     <div className="container-fluid">
       <Navbar />
-      <div className="container">
-        <div className="row">
+      <div className="container flex" style={{height: "100vh"}}>
+        <div className="row subscard">
           {loading ? (
             <Loading />
           ) : (

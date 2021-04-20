@@ -10,18 +10,23 @@ const Login = () => {
   const history = useHistory();
   const url = baseUrl + "/login";
   const payload = { email, password };
-
+  
   function login(event) {
+    console.log(history.location.pathname)
+    const from = history.location.state
+    console.log(from,'<><><>')
     event.preventDefault();
-    loginAsync({ url, payload, history });
+    loginAsync({ url, payload, history, from });
   }
 
   return (
     <div
+    
       className="container-fluid"
       style={{ minHeight: "100vh", background: "black" }}
     >
       <Navbar page={"login"} />
+      {console.log(history.location.state)}
       <div className="text-center box">
         <form style={{ maxWidth: "400px", margin: "auto" }}>
           <h1 className="h3 mb-4 font-weight-bold" style={{ color: "#fff" }}>

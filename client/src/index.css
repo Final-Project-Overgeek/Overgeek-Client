@@ -144,3 +144,140 @@
 .card-img-top {
   object-fit: contain;
 }
+
+/* .wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+} */
+
+.wrapper h4 {
+  perspective: 0;
+  margin: 0;
+  color: #f15a24;
+  text-shadow: 0 2px rgba(0, 0, 0, 0.5);
+  font-size: 6px;
+}
+
+.wrapper span{
+  font-size: 20px;
+}
+
+.wrapper span:before {
+  content: '';
+  animation: animate infinite 20s;
+
+}
+
+@keyframes animate{
+  0%{
+    content: 'We will teach you how to win atleast 1 in 10 matches'
+  }
+  20%{
+    content: 'We will teach you how to spam "?"'
+  }
+  40%{
+    content: 'We will teach you how to be a million $ freelancer'
+  }
+  60%{
+    content: 'We will teach you how to bully the weak'
+  }
+  80%{
+    content: 'We will and always will'
+  }
+  100%{
+    content: 'Subscribe! and reach the very peak of the peak!'
+  }
+}
+
+.community a {
+  padding: 10px 30px;
+  position: relative;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: rgba(241, 90, 36, 0.5);
+  background-color: rgb(34, 32, 32);
+  letter-spacing: 2px;
+}
+
+.community a:hover {
+  color: rgba(241, 90, 36, 1);
+  text-decoration: none;
+}
+
+.community a span {
+  /* display: block; */
+  position: absolute;
+  background-color: #f15a24;
+  text-decoration: none;
+}
+
+.community a span:nth-child(1){
+  left: 0;
+  bottom: 0;
+  width: 1px;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.5s;
+  height: 100%;
+}
+
+.community a:hover span:nth-child(1){
+  transform: scaleY(1);
+  transform-origin: bottom;
+  transition: transform 0.5s;
+}
+
+.community a span:nth-child(2){
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s;
+  height: 1px;
+}
+
+.community a:hover span:nth-child(2){
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform 0.5s;
+}
+
+.community a span:nth-child(3){
+  right: 0;
+  bottom: 0;
+  width: 1px;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.5s;
+  height: 100%;
+}
+
+.community a:hover span:nth-child(3){
+  transform: scaleY(1);
+  transform-origin: top;
+  transition: transform 0.5s;
+}
+
+.community a span:nth-child(4){
+  left: 0;
+  top: 0;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s;
+  height: 1px;
+}
+
+.community a:hover span:nth-child(4){
+  transform: scaleX(1);
+  transform-origin: right;
+  transition: transform 0.5s;
+}
+
+.subscard {
+  justify-content: space-between;
+}
+
