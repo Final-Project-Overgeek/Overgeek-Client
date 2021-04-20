@@ -1,20 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { Navbar, Loading, VideoCard } from "../components";
 import baseUrl from "../api";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setLecturerAsync } from "../store/actions/lecturerAction";
+import {
+  setLecturerAsync,
+  setLecturerRating,
+} from "../store/actions/lecturerAction";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+toast.configure();
 
 const Lecturer = () => {
   const { id } = useParams();
+  const history = useHistory();
   const [loading, setLoading] = useState(true);
   const url = baseUrl + "/lecturers/" + id;
+  const urlRating = `${baseUrl}/ratings/${id}`;
   const dispatch = useDispatch();
   const lecturer = useSelector((state) => state.lecturerReducer.lecturer);
 
   useEffect(() => {
     dispatch(setLecturerAsync({ url, setLoading }));
   }, [url, dispatch]);
+
+  const rateLecturer = () => {
+    if (!localStorage.access_token) {
+      history.push("/login");
+      toast.error(`Please log in first to rate lecturer!`, {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+    dispatch(setLecturerRating({ urlRating, setLoading }));
+  };
 
   return (
     <div className="container-fluid">
@@ -70,24 +89,14 @@ const Lecturer = () => {
                     >
                       Game:
                     </p>
-                    <p
-                      className="movie-desc detail"
-                      style={{ textAlign: "justify" }}
-                    >
-                      {lecturer[0].game}
-                    </p>
+                    <p className="movie-desc detail">{lecturer[0].game}</p>
                     <p
                       className="detail-info fw-bold"
                       style={{ color: "#f15a24" }}
                     >
                       Language:
                     </p>
-                    <p
-                      className="movie-desc detail"
-                      style={{ textAlign: "justify" }}
-                    >
-                      {lecturer[0].language}
-                    </p>
+                    <p className="movie-desc detail">{lecturer[0].language}</p>
                   </div>
                 </div>
                 <div className="col-md-3">
@@ -98,23 +107,40 @@ const Lecturer = () => {
                     >
                       Team:
                     </p>
-                    <p
-                      className="movie-desc detail"
-                      style={{ textAlign: "justify" }}
-                    >
-                      {lecturer[0].team}
-                    </p>
+                    <p className="movie-desc detail">{lecturer[0].team}</p>
                     <p
                       className="detail-info fw-bold"
                       style={{ color: "#f15a24" }}
                     >
                       Role:
                     </p>
+                    <p className="movie-desc detail">{lecturer[0].role}</p>
                     <p
-                      className="movie-desc detail"
-                      style={{ textAlign: "justify" }}
+                      className="detail-info fw-bold"
+                      style={{ color: "#f15a24" }}
                     >
-                      {lecturer[0].role}
+                      Rating:
+                    </p>
+                    <p className="movie-desc detail">
+                      <i
+                        className="bi bi-star-fill mr-1"
+                        style={{ color: "gold" }}
+                      ></i>
+                      {lecturer[0].rating}
+                      <span style={{ fontSize: "10px", marginRight: "3px" }}>
+                        /5
+                      </span>
+                      <span style={{ color: "#666" }}>|</span>
+                      <span
+                        className="rate-icon"
+                        style={{ cursor: "pointer" }}
+                        onClick={rateLecturer}
+                      >
+                        <i className="bi bi-star mr-1 ml-1"></i>
+                        <span style={{ fontSize: "12px" }}>
+                          Rate {lecturer[0].name}
+                        </span>
+                      </span>
                     </p>
                   </div>
                 </div>
@@ -127,8 +153,30 @@ const Lecturer = () => {
               >
                 All Courses
               </h1>
-              <VideoCard />
-              <VideoCard />
+              <div className="col-md-6 p-3">
+                <div className="ratio ratio-16x9">
+                  <iframe
+                    title="YouTube video player"
+                    src="https://drive.google.com/file/d/1bYAEzTIgFvBCPqL0nHSkmBhrWjL7Ybiq/preview"
+                    width="640"
+                    height="480"
+                    allowfullscreen
+                  ></iframe>
+                </div>
+                <h4>Title</h4>
+              </div>
+              <div className="col-md-6 p-3">
+                <div className="ratio ratio-16x9">
+                  <iframe
+                    title="YouTube video player"
+                    src="https://drive.google.com/file/d/1WDRymTBxrpQqa06G0ez_eR6w2yIAwOy9/preview"
+                    width="640"
+                    height="480"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+                <h4>Title</h4>
+              </div>
               <VideoCard />
               <VideoCard />
             </div>

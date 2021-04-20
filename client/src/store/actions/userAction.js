@@ -4,26 +4,28 @@ import "react-toastify/dist/ReactToastify.css";
 toast.configure();
 
 export function loginAsync({ url, payload, history }) {
-  axios({
-    url: url,
-    method: "POST",
-    data: payload,
-  })
-    .then(({ data }) => {
-      localStorage.setItem("access_token", data.access_token);
-      history.push("/");
-      toast.success(`Success to log in to OverGeek!`, {
-        autoClose: 3000,
-        position: toast.POSITION.TOP_CENTER,
-      });
+  return (dispatch) => {
+    axios({
+      url: url,
+      method: "POST",
+      data: payload,
     })
-    .catch((err) => {
-      console.log(err);
-      toast.error(`Failed to log in to OverGeek!`, {
-        autoClose: 3000,
-        position: toast.POSITION.TOP_CENTER,
+      .then(({ data }) => {
+        localStorage.setItem("access_token", data.access_token);
+        history.push("/");
+        toast.success(`Success log in to OverGeek!`, {
+          autoClose: 3000,
+          position: toast.POSITION.TOP_CENTER,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(`Invalid email or password!`, {
+          autoClose: 3000,
+          position: toast.POSITION.TOP_CENTER,
+        });
       });
-    });
+  };
 }
 
 export function registerAsync({ url, payload, history }) {
@@ -34,8 +36,16 @@ export function registerAsync({ url, payload, history }) {
   })
     .then(({ data }) => {
       history.push("/login");
+      toast.success(`Success to sign up!`, {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER,
+      });
     })
     .catch((err) => {
       console.log(err);
+      toast.error(`Failed to sign up!`, {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER,
+      });
     });
 }

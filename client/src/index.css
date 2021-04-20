@@ -144,3 +144,8 @@
 .card-img-top {
   object-fit: contain;
 }
+
+.rate-icon:hover,
+.bi:hover {
+  color: #f15a24;
+}
