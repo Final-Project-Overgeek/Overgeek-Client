@@ -26,7 +26,7 @@ const PaymentCard = ({ data }) => {
           onSuccess: function (result) {
             // console.log(result, "asdasdsad");
             axios({
-              url: "http://localhost:3001/payments/creditcards",
+              url: baseUrl + '/payments/creditcards',
               method: "POST",
               data: {
                 result,

@@ -31,7 +31,7 @@ function Carousel() {
 
   function notice(e){
     e.preventDefault()
-    toast.success(`You have already subscribed!`, {
+    toast.success(`You have already subscribed until ${user.subscription_date}`, {
       autoClose: 5000,
       position: toast.POSITION.TOP_CENTER,
     });
