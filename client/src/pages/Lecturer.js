@@ -7,6 +7,7 @@ import {
   setLecturerAsync,
   setLecturerRating,
 } from "../store/actions/lecturerAction";
+import swal from "@sweetalert/with-react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 toast.configure();
@@ -15,6 +16,22 @@ const Lecturer = () => {
   const { id } = useParams();
   const history = useHistory();
   const [loading, setLoading] = useState(true);
+  const [videos, setVideos] = useState([
+    {
+      title: "Knowing Your Role",
+      url:
+        "https://drive.google.com/file/d/1WDRymTBxrpQqa06G0ez_eR6w2yIAwOy9/preview",
+      isFree: "true",
+    },
+    {
+      title: "Ban & Picks Guide",
+      url:
+        "https://drive.google.com/file/d/1bYAEzTIgFvBCPqL0nHSkmBhrWjL7Ybiq/preview",
+      isFree: "false",
+      thumbnail:
+        "https://cdn.discordapp.com/attachments/832204439967236108/833892058519437312/unknown.png",
+    },
+  ]);
   const url = baseUrl + "/lecturers/" + id;
   const urlRating = `${baseUrl}/ratings/${id}`;
   const dispatch = useDispatch();
@@ -24,6 +41,20 @@ const Lecturer = () => {
     dispatch(setLecturerAsync({ url, setLoading }));
   }, [url, dispatch]);
 
+  const onPick = () => {
+    // swal("Thanks for your rating!", `You rated us ${value}/3`, "success");
+    console.log(`masuk pick`);
+  };
+
+  const Icon = ({ rating, onClick }) => (
+    <i
+      className="bi bi-star mr-1"
+      style={{ color: "gold", cursor: "pointer" }}
+      onClick={() => onClick(rating)}
+      data-rating={rating}
+    ></i>
+  );
+
   const rateLecturer = () => {
     if (!localStorage.access_token) {
       history.push("/login");
@@ -31,8 +62,29 @@ const Lecturer = () => {
         autoClose: 3000,
         position: toast.POSITION.TOP_CENTER,
       });
+    } else {
+      swal({
+        text: `How was your experience getting help by ${lecturer[0].name}'s courses?`,
+        buttons: {
+          1: "1",
+          2: "2",
+          3: "3",
+          4: "4",
+          5: "5",
+          cancel: "Close",
+        },
+      }).then((value) => {
+        if (value) {
+          swal(
+            "Thanks for your rating!",
+            `You rated ${lecturer[0].name} ${value}/5`,
+            "success"
+          );
+        }
+        console.log(value);
+      });
     }
-    dispatch(setLecturerRating({ urlRating, setLoading }));
+    // dispatch(setLecturerRating({ urlRating, setLoading }));
   };
 
   return (
@@ -123,11 +175,11 @@ const Lecturer = () => {
                     </p>
                     <p className="movie-desc detail">
                       <i
-                        className="bi bi-star-fill mr-1"
-                        style={{ color: "gold" }}
+                        className="bi bi-star-fill"
+                        style={{ color: "gold", marginRight: "5px" }}
                       ></i>
                       {lecturer[0].rating}
-                      <span style={{ fontSize: "10px", marginRight: "3px" }}>
+                      <span style={{ fontSize: "10px", marginRight: "5px" }}>
                         /5
                       </span>
                       <span style={{ color: "#666" }}>|</span>
@@ -136,7 +188,10 @@ const Lecturer = () => {
                         style={{ cursor: "pointer" }}
                         onClick={rateLecturer}
                       >
-                        <i className="bi bi-star mr-1 ml-1"></i>
+                        <i
+                          className="bi bi-star mr-1 ml-1"
+                          style={{ margin: "0 5px" }}
+                        ></i>
                         <span style={{ fontSize: "12px" }}>
                           Rate {lecturer[0].name}
                         </span>
@@ -153,46 +208,13 @@ const Lecturer = () => {
               >
                 All Courses
               </h1>
-              <div className="col-md-6 p-3">
-                <div className="ratio ratio-16x9">
-                  <iframe
-                    title="YouTube video player"
-                    src="https://drive.google.com/file/d/1bYAEzTIgFvBCPqL0nHSkmBhrWjL7Ybiq/preview"
-                    width="640"
-                    height="480"
-                    allowfullscreen
-                  ></iframe>
-                </div>
-                <h4>Title</h4>
-              </div>
-              <div className="col-md-6 p-3">
-                <div className="ratio ratio-16x9">
-                  <iframe
-                    title="YouTube video player"
-                    src="https://drive.google.com/file/d/1WDRymTBxrpQqa06G0ez_eR6w2yIAwOy9/preview"
-                    width="640"
-                    height="480"
-                    allowFullScreen
-                  ></iframe>
-                </div>
-                <h4>Title</h4>
-                <video width="320" height="240" controls>
-                  <source src="movie.mp4" type="video/mp4" />
-                  <source
-                    src="/upload/data/e3355f2b46ba90f13779db58fa8d5120"
-                    type="video/ogg"
-                  />
-                  Your browser does not support the video tag.
-                </video>
-                <img
-                  src="/upload/data/7e346a77c6945bf29c28073b8fe312c7"
-                  alt="Logo OverGeek"
-                  height="125"
-                  className="mt-5"
+              {videos.map((video) => (
+                <VideoCard
+                  video={video}
+                  lecturer={lecturer[0].name}
+                  key={video.title}
                 />
-              </div>
-              <VideoCard />
-              <VideoCard />
+              ))}
             </div>
           </div>
         )}

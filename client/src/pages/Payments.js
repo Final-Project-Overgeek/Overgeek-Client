@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Navbar, Loading, Footer } from "../components";
-import axios from "axios";
+import { Navbar, Loading, Footer, PaymentCard } from "../components";
 import baseUrl from "../api";
 import { useHistory } from "react-router-dom";
 import { createToken } from "../store/actions/paymentsAction";
@@ -26,56 +25,10 @@ function Payments() {
     dispatch(setSubscriptionAsync({ url, setLoading }));
   }, []);
 
-  function pay(e, payload) {
-    e.preventDefault();
-    axios({
-      url: "http://localhost:3001/payments/token",
-      method: "POST",
-      data: {
-        payload,
-      },
-      headers: {
-        access_token: localStorage.access_token,
-      },
-    })
-      .then((data) => {
-        window.snap.pay(data.data.token, {
-          onSuccess: function (result) {
-            console.log(result, "asdasdsad");
-          },
-          onPending: (result) => {
-            console.log(result, "pasti masuk sini!");
-            axios({
-              url: "http://localhost:3001/payments",
-              method: "POST",
-              data: {
-                result,
-              },
-              headers: {
-                access_token: localStorage.access_token,
-              },
-            })
-              .then((data) => {
-                console.log(data);
-                history.push("/");
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          },
-          onError: function (result) {
-            console.log(result, "");
-          },
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
   return (
     <div className="container-fluid">
       <Navbar />
-      <div className="container flex" style={{ height: "100vh" }}>
+      <div className="content">
         <div className="row subscard">
           <h1
             style={{
@@ -90,41 +43,11 @@ function Payments() {
           {loading ? (
             <Loading />
           ) : (
-            subscriptions.map((data) => {
-              return (
-                <div
-                  className="card col-3"
-                  style={{ width: "18rem", background: "transparent" }}
-                >
-                  <img
-                    className="card-img-top"
-                    src={data.image}
-                    style={{ height: "25rem" }}
-                  />
-                  <div className="card-body">
-                    <p className="card-text">
-                      {data.name === "monthly"
-                        ? "1 month"
-                        : data.name === "season"
-                        ? "6 months"
-                        : "12 months"}
-                    </p>
-                    <p className="card-text">IDR {data.price}</p>
-                    <button
-                      className="btn button-courses"
-                      style={{
-                        background: "#f15a24",
-                        bordeRadius: "5px",
-                        color: "white",
-                      }}
-                      onClick={(e) => pay(e, data)}
-                    >
-                      Subscribe!
-                    </button>
-                  </div>
-                </div>
-              );
-            })
+            <div className="row justify-content-center">
+              {subscriptions.map((data) => (
+                <PaymentCard data={data} key={data.name} />
+              ))}
+            </div>
           )}
         </div>
       </div>

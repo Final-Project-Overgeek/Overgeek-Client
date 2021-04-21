@@ -127,7 +127,7 @@
 }
 
 .movie-title:hover {
-  color: #f15a24;
+  color: #ca4c1e;
   cursor: pointer;
 }
 
@@ -170,13 +170,13 @@
     content: 'We will teach you how to spam "?"';
   }
   40% {
-    content: "We will teach you how to be a million $ freelancer";
+    content: "Get answers to your questions from our Pros and community";
   }
   60% {
-    content: "We will teach you how to bully the weak";
+    content: "Daily releases up to date with the latest patch";
   }
   80% {
-    content: "We will and always will";
+    content: "Access guides created only by Pro players";
   }
   100% {
     content: "Subscribe! and reach the very peak of the peak!";
@@ -269,10 +269,11 @@
 }
 
 .subscard {
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
 }
 
 .rate-icon:hover,
 .bi:hover {
-  color: #f15a24;
+  color: #ca4c1e;
 }

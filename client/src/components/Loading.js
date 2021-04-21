@@ -2,9 +2,15 @@ import React from "react";
 
 const Loading = () => {
   return (
-    <div className="container">
-      <div className="spinner-border align-text-center loading" role="status">
-        <span className="visually-hidden">Loading...</span>
+    <div style={{ backgroundColor: "black", height: "100vh" }}>
+      <div className="container">
+        <div className="text-center">
+          <div
+            className="spinner-border"
+            role="status"
+            style={{ marginTop: "20rem", color: "#f15a24" }}
+          ></div>
+        </div>
       </div>
     </div>
   );

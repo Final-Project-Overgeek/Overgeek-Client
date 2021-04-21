@@ -36,7 +36,7 @@ const Home = () => {
           <h5 className="my-3">Join Our Community</h5>
           <CommunityCarousel />
         </div>
-        <h5 style={{ fontWeight: "600", margin: "30px 0" }}>
+        <h5 style={{ fontWeight: "600", margin: "70px 0 30px" }}>
           CHOOSE YOUR GAME
         </h5>
 
