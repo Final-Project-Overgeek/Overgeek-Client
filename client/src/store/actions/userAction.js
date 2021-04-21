@@ -49,3 +49,25 @@ export function registerAsync({ url, payload, history }) {
       });
     });
 }
+
+export function setUser(payload) {
+  return { type: 'user/setUser', payload };
+}
+
+export function getUser({ url }) {
+  return (dispatch) => {
+    axios({
+      url: url,
+      method: 'GET',
+      headers: {
+        access_token: localStorage.access_token
+      }
+    })
+    .then(({ data }) => {
+      dispatch(setUser(data))
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+}
