@@ -2,6 +2,9 @@ import React from "react";
 import axios from "axios";
 import baseUrl from "../api";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+toast.configure();
 
 const PaymentCard = ({ data }) => {
   const history = useHistory();
@@ -21,7 +24,29 @@ const PaymentCard = ({ data }) => {
       .then((data) => {
         window.snap.pay(data.data.token, {
           onSuccess: function (result) {
-            console.log(result, "asdasdsad");
+            // console.log(result, "asdasdsad");
+            axios({
+              url: "http://localhost:3001/payments/creditcards",
+              method: "POST",
+              data: {
+                result,
+                payload
+              }, 
+              headers: {
+                access_token: localStorage.access_token
+              }
+            })
+            .then(data => {
+              console.log(data.data)
+            })
+            .catch(err => {
+              console.log(err)
+            })
+            toast.success(`Payments Succeed!`, {
+              autoClose: 5000,
+              position: toast.POSITION.TOP_CENTER,
+            });
+            history.push('/')
           },
           onPending: (result) => {
             console.log(result, "pasti masuk sini!");
