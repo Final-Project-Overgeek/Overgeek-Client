@@ -1,12 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Navbar, GameCard, CommunityCarousel, Footer } from "../components";
-import { useDispatch, useSelector } from "react-redux";
-
-
 
 const Home = () => {
-  
-
   const [games] = useState([
     {
       title: "League of Legends: Wild Rift",

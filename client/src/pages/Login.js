@@ -15,7 +15,6 @@ const Login = () => {
 
   function login(event) {
     event.preventDefault();
-    loginAsync({ url, payload, history });
     dispatch(loginAsync({ url, payload, history }));
   }
 
@@ -25,7 +24,6 @@ const Login = () => {
       style={{ minHeight: "100vh", background: "black" }}
     >
       <Navbar page={"login"} />
-      {console.log(history.location.state)}
       <div className="text-center box">
         <form
           style={{
@@ -62,6 +60,8 @@ const Login = () => {
               className="btn btn-lg btn-block"
               onClick={(event) => {
                 login(event);
+                setEmail("");
+                setPassword("");
               }}
             >
               Log in

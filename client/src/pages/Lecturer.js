@@ -16,22 +16,6 @@ const Lecturer = () => {
   const { id } = useParams();
   const history = useHistory();
   const [loading, setLoading] = useState(true);
-  const [videos, setVideos] = useState([
-    {
-      title: "Knowing Your Role",
-      url:
-        "https://drive.google.com/file/d/1WDRymTBxrpQqa06G0ez_eR6w2yIAwOy9/preview",
-      isFree: "true",
-    },
-    {
-      title: "Ban & Picks Guide",
-      url:
-        "https://drive.google.com/file/d/1bYAEzTIgFvBCPqL0nHSkmBhrWjL7Ybiq/preview",
-      isFree: "false",
-      thumbnail:
-        "https://cdn.discordapp.com/attachments/832204439967236108/833892058519437312/unknown.png",
-    },
-  ]);
   const url = baseUrl + "/lecturers/" + id;
   const urlRating = `${baseUrl}/ratings/${id}`;
   const dispatch = useDispatch();
@@ -40,20 +24,6 @@ const Lecturer = () => {
   useEffect(() => {
     dispatch(setLecturerAsync({ url, setLoading }));
   }, [url, dispatch]);
-
-  const onPick = () => {
-    // swal("Thanks for your rating!", `You rated us ${value}/3`, "success");
-    console.log(`masuk pick`);
-  };
-
-  const Icon = ({ rating, onClick }) => (
-    <i
-      className="bi bi-star mr-1"
-      style={{ color: "gold", cursor: "pointer" }}
-      onClick={() => onClick(rating)}
-      data-rating={rating}
-    ></i>
-  );
 
   const rateLecturer = () => {
     if (!localStorage.access_token) {
@@ -75,16 +45,17 @@ const Lecturer = () => {
         },
       }).then((value) => {
         if (value) {
-          swal(
-            "Thanks for your rating!",
-            `You rated ${lecturer[0].name} ${value}/5`,
-            "success"
+          dispatch(
+            setLecturerRating({
+              urlRating,
+              setLoading,
+              value,
+              lecturer: lecturer[0].name,
+            })
           );
         }
-        console.log(value);
       });
     }
-    // dispatch(setLecturerRating({ urlRating, setLoading }));
   };
 
   return (
@@ -208,7 +179,7 @@ const Lecturer = () => {
               >
                 All Courses
               </h1>
-              {videos.map((video) => (
+              {lecturer[0].videos.map((video) => (
                 <VideoCard
                   video={video}
                   lecturer={lecturer[0].name}

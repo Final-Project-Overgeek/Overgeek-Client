@@ -1,14 +1,14 @@
-import { combineReducers } from 'redux';
-import lecturerReducer from './lecturerReducer';
+import { combineReducers } from "redux";
+import lecturerReducer from "./lecturerReducer";
 import userReducer from "./userReducer";
-import paymentsReducer from './paymentsReducer';
-import subscriptionsReducer from './subscriptionsReducer'
+import paymentsReducer from "./paymentsReducer";
+import subscriptionsReducer from "./subscriptionsReducer";
 
 const reducer = combineReducers({
   lecturerReducer,
   userReducer,
   paymentsReducer,
-  subscriptionsReducer
+  subscriptionsReducer,
 });
 
 export default reducer;

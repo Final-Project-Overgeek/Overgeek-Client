@@ -19,8 +19,7 @@ export function loginAsync({ url, payload, history }) {
         });
       })
       .catch((err) => {
-        console.log(err);
-        toast.error(`Invalid email or password!`, {
+        toast.error(`${err.response.data.message}!`, {
           autoClose: 3000,
           position: toast.POSITION.TOP_CENTER,
         });
@@ -42,8 +41,7 @@ export function registerAsync({ url, payload, history }) {
       });
     })
     .catch((err) => {
-      console.log(err);
-      toast.error(`Failed to sign up!`, {
+      toast.error(`${err.response.data.errorMsg[0]}!`, {
         autoClose: 3000,
         position: toast.POSITION.TOP_CENTER,
       });
@@ -51,23 +49,23 @@ export function registerAsync({ url, payload, history }) {
 }
 
 export function setUser(payload) {
-  return { type: 'user/setUser', payload };
+  return { type: "user/setUser", payload };
 }
 
 export function getUser({ url }) {
   return (dispatch) => {
     axios({
       url: url,
-      method: 'GET',
+      method: "GET",
       headers: {
-        access_token: localStorage.access_token
-      }
+        access_token: localStorage.access_token,
+      },
     })
-    .then(({ data }) => {
-      dispatch(setUser(data))
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  }
+      .then(({ data }) => {
+        dispatch(setUser(data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 }

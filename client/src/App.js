@@ -31,9 +31,6 @@ const App = () => {
             component={Payments}
             meta={{ auth: true }}
           />
-          {/* <Route path="/payments">
-          <Payments />
-        </Route> */}
           <Route path="/signup">
             <SignUp />
           </Route>

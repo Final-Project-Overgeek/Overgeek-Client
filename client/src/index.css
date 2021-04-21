@@ -275,5 +275,13 @@
 
 .rate-icon:hover,
 .bi:hover {
-  color: #ca4c1e;
+  color: rgb(202, 76, 30);
+}
+
+.premium-box {
+  font-size: 0.8rem;
+  font-weight: 500;
+  background-color: #772ce8;
+  border-radius: 50px;
+  padding: 2px 7px;
 }

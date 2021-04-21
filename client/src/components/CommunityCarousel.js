@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../store/actions/userAction";
@@ -8,14 +8,15 @@ import "react-toastify/dist/ReactToastify.css";
 toast.configure();
 
 function Carousel() {
-  const dispatch = useDispatch()
-  const url = baseUrl + "/users"
-  const user = useSelector((state) => state.userReducer.user)
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const url = baseUrl + "/users";
+  const user = useSelector((state) => state.userReducer.user);
+
   useEffect(() => {
     dispatch(getUser({ url }));
-  }, [user.premium]);
+  }, [user.premium, url, dispatch]);
 
-  const history = useHistory();
   function gotoPayment(e) {
     e.preventDefault();
     if (!localStorage.access_token) {
@@ -29,12 +30,18 @@ function Carousel() {
     }
   }
 
-  function notice(e){
-    e.preventDefault()
-    toast.success(`You have already subscribed until ${user.subscription_date}`, {
-      autoClose: 5000,
-      position: toast.POSITION.TOP_CENTER,
-    });
+  function notice(e) {
+    e.preventDefault();
+    toast.dark(
+      `You have already subscribed OverGeek until ${user.subscription_date.slice(
+        0,
+        10
+      )}`,
+      {
+        autoClose: 5000,
+        position: toast.POSITION.TOP_CENTER,
+      }
+    );
   }
 
   return (
@@ -44,24 +51,23 @@ function Carousel() {
           <span></span>
         </h4>
       </div>
-      {
-        !user.premium ? 
-          <a href="#" onClick={(e) => gotoPayment(e)}>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            Subscribe
-          </a> :
-          <a href="#" onClick={(e) => notice(e)}>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            Subscribed
-          </a>
-        
-      }
+      {!user.premium ? (
+        <a href="/payments" onClick={(e) => gotoPayment(e)}>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          Subscribe
+        </a>
+      ) : (
+        <a href="/payments" onClick={(e) => notice(e)}>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          Subscribed
+        </a>
+      )}
     </div>
   );
 }
