@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Navbar, GameCard, CommunityCarousel, Footer } from "../components";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser } from "../store/actions/userAction";
-import baseUrl from "../api";
+
+
 
 const Home = () => {
-  const dispatch = useDispatch()
-  const url = baseUrl + "/users"
-  useEffect(() => {
-    dispatch(getUser({ url }));
-  }, []);
+  
 
   const [games] = useState([
     {
