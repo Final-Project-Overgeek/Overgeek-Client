@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 
 const LecturerCard = ({ lecturer }) => {
   const history = useHistory();
+
   const toLecturerDetail = (event, id) => {
     event.preventDefault();
     history.push(`/lecturer/${id}`);

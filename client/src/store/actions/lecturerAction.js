@@ -1,4 +1,5 @@
 import axios from "axios";
+import swal from "@sweetalert/with-react";
 
 export function setLecturers(payload) {
   return { type: "lecturers/setLecturers", payload };
@@ -40,19 +41,35 @@ export function setLecturerAsync({ url, setLoading }) {
   };
 }
 
-export const setLecturerRating = ({ url, setLoading }) => {
+export const setLecturerRating = ({
+  urlRating,
+  setLoading,
+  value,
+  lecturer,
+}) => {
   return (dispatch) => {
-    console.log(`rating lecturer`);
-    // axios({
-    //   url: url,
-    //   method: "POST",
-    //   headers: { access_token: localStorage.access_token },
-    // })
-    //   .then((result) => {
-    //     setLoading(false);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    axios({
+      url: urlRating,
+      method: "POST",
+      headers: { access_token: localStorage.access_token },
+      data: {
+        rating: value,
+      },
+    })
+      .then((result) => {
+        setLoading(false);
+        swal(
+          "Thanks for your rating!",
+          `You rated ${lecturer} ${value}/5`,
+          "success"
+        );
+      })
+      .catch((err) => {
+        swal(
+          "Failed to rating this lecturer!",
+          "You have already rate this lecturer",
+          "error"
+        );
+      });
   };
 };

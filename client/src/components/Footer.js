@@ -4,6 +4,7 @@ import LogoOverGeek from "../assets/images/OVERGEEK_LOGO_WHITE.svg";
 
 const Footer = () => {
   const history = useHistory();
+
   const toGame = (event, title) => {
     event.preventDefault();
     history.push(`/game/${title}`);
@@ -27,13 +28,13 @@ const Footer = () => {
           <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
             <h5
               className="text-uppercase mb-4 fw-bold"
-              style={{ color: "#f15a24" }}
+              style={{ color: "#f15a24", fontSize: "18px" }}
             >
               Games
             </h5>
             <p>
               <a
-                href="false"
+                href="/games"
                 className="text-white"
                 style={{ textDecoration: "none" }}
                 onClick={(event) => {
@@ -45,7 +46,7 @@ const Footer = () => {
             </p>
             <p>
               <a
-                href="false"
+                href="/games"
                 className="text-white"
                 style={{ textDecoration: "none" }}
                 onClick={(event) => {
@@ -57,7 +58,7 @@ const Footer = () => {
             </p>
             <p>
               <a
-                href="false"
+                href="/games"
                 className="text-white"
                 style={{ textDecoration: "none" }}
                 onClick={(event) => {
@@ -69,7 +70,7 @@ const Footer = () => {
             </p>
             <p>
               <a
-                href="false"
+                href="/games"
                 className="text-white"
                 style={{ textDecoration: "none" }}
                 onClick={(event) => {
@@ -83,7 +84,7 @@ const Footer = () => {
           <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
             <h5
               className="text-uppercase mb-4 fw-bold"
-              style={{ color: "#f15a24" }}
+              style={{ color: "#f15a24", fontSize: "18px" }}
             >
               Resources
             </h5>
@@ -102,15 +103,15 @@ const Footer = () => {
           <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
             <h5
               className="text-uppercase mb-4 fw-bold"
-              style={{ color: "#f15a24" }}
+              style={{ color: "#f15a24", fontSize: "18px" }}
             >
               Contact
             </h5>
             <p>
-              <i class="bi bi-house-door-fill mr-3"></i>Jakarta, Indonesia
+              <i className="bi bi-house-door-fill mr-2"></i>Jakarta, Indonesia
             </p>
             <p>
-              <i class="bi bi-envelope-fill mr-3"></i>overgeek@gmail.com
+              <i className="bi bi-envelope-fill mr-2"></i>overgeek@gmail.com
             </p>
           </div>
         </div>

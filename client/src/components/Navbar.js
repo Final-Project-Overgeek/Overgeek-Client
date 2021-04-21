@@ -3,15 +3,20 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LogoOverGeek from "../assets/images/OVERGEEK_LOGO_WHITE.svg";
 import { Link, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../store/actions/userAction";
 toast.configure();
 
 const Navbar = ({ page }) => {
+  const dispatch = useDispatch();
   const history = useHistory();
+  const user = useSelector((state) => state.userReducer.user);
 
   const logout = (event) => {
     event.preventDefault();
     localStorage.removeItem("access_token");
     history.push("/login");
+    dispatch(setUser({}));
     toast.success(`Success to log out!`, {
       autoClose: 3000,
       position: toast.POSITION.TOP_CENTER,
@@ -51,6 +56,30 @@ const Navbar = ({ page }) => {
           <ul className="navbar-nav ms-auto text-center">
             {localStorage.access_token ? (
               <>
+                <li>
+                  <p
+                    className="nav-link"
+                    style={{
+                      color: "#fff",
+                      padding: "8px 20px",
+                      fontWeight: "700",
+                      fontSize: "18px",
+                    }}
+                  >
+                    Hai!,
+                    {user.premium ? (
+                      <>
+                        <span style={{ color: "gold", marginRight: "7px" }}>
+                          {" "}
+                          {user.username}
+                        </span>
+                        <span className="premium-box">premium</span>
+                      </>
+                    ) : (
+                      <span style={{ color: "gold" }}> {user.username}</span>
+                    )}
+                  </p>
+                </li>
                 <li>
                   <a
                     className="nav-link button-signup"

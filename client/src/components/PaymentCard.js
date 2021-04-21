@@ -4,10 +4,25 @@ import baseUrl from "../api";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useDispatch } from "react-redux";
+import { setUser } from "../store/actions/userAction";
+import swal from "@sweetalert/with-react";
 toast.configure();
 
 const PaymentCard = ({ data }) => {
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  const convertToRupiah = (angka) => {
+    let rupiah = "";
+    let angkarev = angka.toString().split("").reverse().join("");
+    for (let i = 0; i < angkarev.length; i++)
+      if (i % 3 === 0) rupiah += angkarev.substr(i, 3) + ".";
+    return rupiah
+      .split("", rupiah.length - 1)
+      .reverse()
+      .join("");
+  };
 
   const pay = (e, payload) => {
     e.preventDefault();
@@ -24,32 +39,33 @@ const PaymentCard = ({ data }) => {
       .then((data) => {
         window.snap.pay(data.data.token, {
           onSuccess: function (result) {
-            // console.log(result, "asdasdsad");
             axios({
-              url: baseUrl + '/payments/creditcards',
+              url: baseUrl + "/payments/creditcards",
               method: "POST",
               data: {
                 result,
-                payload
-              }, 
+                payload,
+              },
               headers: {
-                access_token: localStorage.access_token
-              }
+                access_token: localStorage.access_token,
+              },
             })
-            .then(data => {
-              console.log(data.data)
-            })
-            .catch(err => {
-              console.log(err)
-            })
-            toast.success(`Payments Succeed!`, {
-              autoClose: 5000,
-              position: toast.POSITION.TOP_CENTER,
-            });
-            history.push('/')
+              .then((data) => {
+                console.log(data.data);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+            swal(
+              "Payment Succeed!",
+              "Welcome to Our Community, Please log in again!",
+              "success"
+            );
+            history.push("/login");
+            localStorage.removeItem("access_token");
+            dispatch(setUser({}));
           },
           onPending: (result) => {
-            console.log(result, "pasti masuk sini!");
             axios({
               url: baseUrl + "/payments",
               method: "POST",
@@ -61,7 +77,6 @@ const PaymentCard = ({ data }) => {
               },
             })
               .then((data) => {
-                console.log(data);
                 history.push("/");
               })
               .catch((err) => {
@@ -69,7 +84,7 @@ const PaymentCard = ({ data }) => {
               });
           },
           onError: function (result) {
-            console.log(result, "");
+            console.log(result);
           },
         });
       })
@@ -92,12 +107,12 @@ const PaymentCard = ({ data }) => {
       <div className="card-body">
         <p className="card-text">
           {data.name === "monthly"
-            ? "1 month"
+            ? "Monthly"
             : data.name === "season"
-            ? "6 months"
-            : "12 months"}
+            ? "Season"
+            : "Annual"}
         </p>
-        <p className="card-text">IDR {data.price}</p>
+        <p className="card-text">IDR {convertToRupiah(data.price)}</p>
         <button
           className="btn button-courses"
           style={{

@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 
 const GameCard = ({ game }) => {
   const history = useHistory();
+
   const toGame = (event, title) => {
     event.preventDefault();
     history.push(`/game/${title}`);
