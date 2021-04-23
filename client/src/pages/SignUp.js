@@ -17,10 +17,6 @@ const Register = () => {
   function register(event) {
     event.preventDefault();
     registerAsync({ url, payload, history });
-    setUsername("");
-    setEmail("");
-    setPassword("");
-    setPhoneNumber("");
   }
 
   return (
