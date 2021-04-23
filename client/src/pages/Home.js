@@ -31,7 +31,7 @@ const Home = () => {
         <h1 className="fw-bold">
           Welcome To OverG<span style={{ color: "#f15a24" }}>ee</span>k
         </h1>
-        <h4 className="mt-3 mb-5">Best Way To Improve Your Skill</h4>
+        <h4 className="mt-3 mb-5">Best Way To Improve Your Gaming Skill</h4>
         <div className="community">
           <h5 className="my-3">Join Our Community</h5>
           <CommunityCarousel />

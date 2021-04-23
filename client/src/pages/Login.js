@@ -60,8 +60,6 @@ const Login = () => {
               className="btn btn-lg btn-block"
               onClick={(event) => {
                 login(event);
-                setEmail("");
-                setPassword("");
               }}
             >
               Log in
