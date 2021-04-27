@@ -1,3 +1,3 @@
-# Overgeek-Client
+# OverGeek-Client
 
-Creating new Overgeek in Client
+Deployed Demo OverGeek: http://overgeek-web-app.s3-website-us-east-1.amazonaws.com/
